@@ -3,15 +3,34 @@
 import { motion } from 'framer-motion';
 import { Star, ExternalLink } from 'lucide-react';
 import { Github } from '@/components/icons/BrandIcons';
-import { personalInfo } from '@/lib/data';
 import { getLanguageColor } from '@/lib/utils';
 import { fadeUp, staggerContainer } from '@/lib/animations';
 
 import { useState, useEffect } from 'react';
 import { GitHubCalendar } from 'react-github-calendar';
 
+interface GitHubRepo {
+  name: string;
+  url: string;
+  description: string;
+  language: string;
+  stars: number;
+  updatedAt: string;
+}
+
+interface GitHubLang {
+  name: string;
+  percentage: number;
+}
+
+interface GitHubData {
+  repos: GitHubRepo[];
+  languageDistribution: GitHubLang[];
+  username: string | null;
+}
+
 export default function GitHubActivity() {
-  const [data, setData] = useState({ repos: [], languageDistribution: [], username: null });
+  const [data, setData] = useState<GitHubData>({ repos: [], languageDistribution: [], username: null });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -89,7 +108,7 @@ export default function GitHubActivity() {
           variants={staggerContainer}
           className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8"
         >
-          {data.repos.map((repo: any) => (
+          {data.repos.map((repo) => (
             <motion.a
               key={repo.name}
               href={repo.url}
@@ -148,7 +167,7 @@ export default function GitHubActivity() {
 
           {/* Stacked Bar */}
           <div className="flex h-4 rounded-full overflow-hidden">
-            {data.languageDistribution.map((lang: any) => (
+            {data.languageDistribution.map((lang) => (
               <div
                 key={lang.name}
                 className="transition-all duration-700"
@@ -163,7 +182,7 @@ export default function GitHubActivity() {
 
           {/* Labels */}
           <div className="flex flex-wrap gap-4 mt-4">
-            {data.languageDistribution.map((lang: any) => (
+            {data.languageDistribution.map((lang) => (
               <span key={lang.name} className="flex items-center gap-1.5 text-sm text-text-secondary">
                 <span
                   className="w-3 h-3 rounded-full inline-block"

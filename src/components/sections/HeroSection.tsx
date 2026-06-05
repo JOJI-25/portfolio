@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FolderKanban, FileDown, ChevronDown } from 'lucide-react';
 import { useProfile } from '@/hooks/useProfile';
@@ -61,7 +61,7 @@ function useTypingAnimation(phrases: string[]) {
 
 // ── Component ─────────────────────────────────────────────────
 export default function HeroSection() {
-  const { profile: personalInfo, loading } = useProfile();
+  const { profile: personalInfo } = useProfile();
   const typedText = useTypingAnimation(personalInfo.typingPhrases);
 
   return (

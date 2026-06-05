@@ -140,11 +140,13 @@ function ProjectCard({
   );
 }
 
+import type { Project } from '@/types';
+
 // ─── Featured Projects Section ──────────────────────────────
 export default function FeaturedProjects() {
   const [activeFilter, setActiveFilter] = useState<FilterCategory>('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [projects, setProjects] = useState<any[]>([]);
+  const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
 
   // Fetch projects from Prisma database
@@ -153,7 +155,7 @@ export default function FeaturedProjects() {
       .then((res) => res.json())
       .then((data) => {
         // Format technologies back to array from comma-separated string
-        const formatted = data.map((p: any) => ({
+        const formatted = data.map((p: Project & { technologies?: string }) => ({
           ...p,
           technologies: p.technologies ? p.technologies.split(',').map((t: string) => t.trim()) : []
         }));

@@ -125,9 +125,11 @@ function MetricCard({ label, value, icon, suffix }: MetricCardProps) {
   );
 }
 
+import type { MetricItem } from '@/types';
+
 // ─── Recruiter Dashboard Section ────────────────────────────
 export default function RecruiterDashboard() {
-  const [metrics, setMetrics] = useState<any[]>([]);
+  const [metrics, setMetrics] = useState<MetricItem[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

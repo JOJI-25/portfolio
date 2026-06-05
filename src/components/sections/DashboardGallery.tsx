@@ -78,10 +78,12 @@ function DashboardCard({ id, title, tool }: DashboardCardProps) {
   );
 }
 
+import type { DashboardItem } from '@/types';
+
 // ─── Dashboard Gallery Section ──────────────────────────────
 export default function DashboardGallery() {
   const [activeFilter, setActiveFilter] = useState<ToolFilter>('all');
-  const [dashboards, setDashboards] = useState<any[]>([]);
+  const [dashboards, setDashboards] = useState<DashboardItem[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
