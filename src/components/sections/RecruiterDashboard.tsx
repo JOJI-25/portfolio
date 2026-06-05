@@ -135,7 +135,7 @@ export default function RecruiterDashboard() {
   useEffect(() => {
     fetch('/api/metrics')
       .then(res => res.json())
-      .then(data => {
+      .then(data => { if (!Array.isArray(data)) { throw new Error('API returned non-array'); }
         setMetrics(data);
         setLoading(false);
       })

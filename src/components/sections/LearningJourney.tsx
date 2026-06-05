@@ -117,7 +117,7 @@ export default function LearningJourney() {
   useEffect(() => {
     fetch('/api/journey', { cache: 'no-store' })
       .then(res => res.json())
-      .then(data => {
+      .then(data => { if (!Array.isArray(data)) { throw new Error('API returned non-array'); }
         setJourneyItems(data);
         setLoading(false);
       })
