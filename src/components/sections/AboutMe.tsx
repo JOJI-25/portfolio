@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useProfile, defaultProfile } from '@/hooks/useProfile';
+import { useProfile } from '@/hooks/useProfile';
 import { slideLeft, slideRight, staggerContainer, fadeUp } from '@/lib/animations';
 
 // ─── Extract Initials ───────────────────────────────────────
@@ -17,7 +17,7 @@ function getInitials(name: string): string {
 }
 
 export default function AboutMe() {
-  const { profile: personalInfo, loading } = useProfile();
+  const { profile: personalInfo } = useProfile();
   const initials = getInitials(personalInfo.name);
 
   // ─── Info Card Data ─────────────────────────────────────────

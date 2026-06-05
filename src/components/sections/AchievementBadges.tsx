@@ -16,8 +16,10 @@ const earnedBounce: Variants = {
   },
 };
 
+import type { Achievement } from '@/types';
+
 export default function AchievementBadges() {
-  const [achievements, setAchievements] = useState<any[]>([]);
+  const [achievements, setAchievements] = useState<Achievement[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

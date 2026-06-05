@@ -73,8 +73,8 @@ export default function ContactSection() {
 
       setIsSuccess(true);
       setFormData({ name: '', email: '', message: '' });
-    } catch (err: any) {
-      setError(err.message || 'Something went wrong. Please try again.');
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
     } finally {
       setIsSubmitting(false);
     }

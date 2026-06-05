@@ -26,9 +26,11 @@ const slideFromRight: Variants = {
   },
 };
 
+import type { Certification } from '@/types';
+
 export default function Certifications() {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [certifications, setCertifications] = useState<any[]>([]);
+  const [certifications, setCertifications] = useState<Certification[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
