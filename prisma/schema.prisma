@@ -1,0 +1,117 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  id              String   @id @default(cuid())
+  title           String
+  description     String
+  longDescription String?
+  thumbnail       String
+  images          String   // We will store as JSON string or comma-separated
+  technologies    String   // Comma-separated list
+  category        String
+  githubUrl       String?
+  featured        Boolean  @default(false)
+  date            String?  // YYYY-MM-DD
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Skill {
+  id              String   @id @default(cuid())
+  name            String
+  icon            String
+  status          String   // 'completed', 'learning', 'upcoming'
+  progress        Int?
+  description     String
+  relatedProjects String?  // Comma-separated Project IDs
+  parentSkill     String?
+  children        String?  // Comma-separated Skill IDs
+  notes           String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Certification {
+  id        String   @id @default(cuid())
+  title     String
+  issuer    String
+  date      String
+  image     String
+  skills    String   // Comma-separated list
+  verifyUrl String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PersonalInfo {
+  id              String   @id @default("default")
+  name            String
+  title           String
+  email           String
+  github          String
+  linkedin        String
+  bio             String
+  education       String
+  university      String
+  careerObjective String
+  typingPhrases   String   // Comma-separated
+  resumeUrl       String?
+  updatedAt       DateTime @updatedAt
+}
+
+model JourneyItem {
+  id          String   @id @default(cuid())
+  title       String
+  role        String
+  company     String
+  date        String
+  skill       String   @default("")
+  description String
+  icon        String   @default("📌")
+  status      String   @default("upcoming")
+  type        String   // 'work', 'education'
+  skills      String   // Comma-separated list
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model MetricItem {
+  id        String   @id @default(cuid())
+  label     String
+  value     Int
+  icon      String
+  suffix    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model DashboardItem {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  image       String
+  link        String?
+  tool        String   @default("Analytics") // "Power BI" | "Excel" | "Analytics"
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Achievement {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  icon        String
+  date        String?
+  status      String   @default("locked") // "earned" | "in-progress" | "locked"
+  level       Int      @default(0)
+  progress    Int?     @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
