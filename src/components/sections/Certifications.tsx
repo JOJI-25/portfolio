@@ -36,7 +36,7 @@ export default function Certifications() {
   useEffect(() => {
     fetch('/api/certifications')
       .then((res) => res.json())
-      .then((data) => {
+      .then(data => { if (data && data.error) throw new Error('API Error'); if (!Array.isArray(data)) data = [];
         setCertifications(data);
         setLoading(false);
       })

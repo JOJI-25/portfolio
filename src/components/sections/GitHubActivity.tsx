@@ -36,7 +36,7 @@ export default function GitHubActivity() {
   useEffect(() => {
     fetch('/api/github')
       .then(res => res.json())
-      .then(resData => {
+      .then(resData => { if (resData && resData.error) throw new Error('API Error'); if (!Array.isArray(resData)) resData = [];
         setData(resData);
         setLoading(false);
       })

@@ -225,7 +225,7 @@ export default function SkillsRoadmap() {
   useEffect(() => {
     fetch('/api/skills', { cache: 'no-store' })
       .then(res => res.json())
-      .then(data => { if (!Array.isArray(data)) { throw new Error('API returned non-array'); }
+      .then(data => { if (data && data.error) throw new Error('API Error'); if (!Array.isArray(data)) data = []; if (!Array.isArray(data)) { throw new Error('API returned non-array'); }
         setSkills(data);
         setLoading(false);
       })

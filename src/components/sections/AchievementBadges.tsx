@@ -25,7 +25,7 @@ export default function AchievementBadges() {
   useEffect(() => {
     fetch('/api/achievements')
       .then((res) => res.json())
-      .then((data) => {
+      .then(data => { if (data && data.error) throw new Error('API Error'); if (!Array.isArray(data)) data = [];
         setAchievements(data);
         setLoading(false);
       })

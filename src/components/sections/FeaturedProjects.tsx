@@ -153,7 +153,7 @@ export default function FeaturedProjects() {
   useEffect(() => {
     fetch('/api/projects')
       .then((res) => res.json())
-      .then((data) => {
+      .then(data => { if (data && data.error) throw new Error('API Error'); if (!Array.isArray(data)) data = [];
         // Format technologies back to array from comma-separated string
         const formatted = data.map((p: Project & { technologies?: string }) => ({
           ...p,
