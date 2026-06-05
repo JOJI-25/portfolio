@@ -118,18 +118,32 @@ function ParticleNetwork() {
   );
 }
 
-// ── Main Canvas Wrapper ─────────────────────────────────────
+class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean }> {
+  constructor(props: { children: React.ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
+  static getDerivedStateFromError() { return { hasError: true }; }
+  componentDidCatch(error: any) { console.error("3D Scene Error:", error); }
+  render() {
+    if (this.state.hasError) return <div className="absolute inset-0 bg-black/50" />;
+    return this.props.children;
+  }
+}
+
 export default function Hero3DScene() {
   return (
     <div className="w-full h-full relative cursor-crosshair">
-      <Canvas
-        camera={{ position: [0, 0, 7], fov: 45 }}
-        dpr={[1, 2]} // High DPI support
-        gl={{ alpha: true, antialias: true }}
-      >
-        <ambientLight intensity={0.5} />
-        <ParticleNetwork />
-      </Canvas>
+      <ErrorBoundary>
+        <Canvas
+          camera={{ position: [0, 0, 7], fov: 45 }}
+          dpr={[1, 2]} // High DPI support
+          gl={{ alpha: true, antialias: true }}
+        >
+          <ambientLight intensity={0.5} />
+          <ParticleNetwork />
+        </Canvas>
+      </ErrorBoundary>
     </div>
   );
 }
