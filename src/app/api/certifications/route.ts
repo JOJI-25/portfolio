@@ -8,21 +8,6 @@ export async function GET() {
   try {
     let items = await db.certification.findMany();
     
-    // Auto-seed if empty
-    if (items.length === 0) {
-      await db.certification.createMany({
-        data: defaultCertifications.map(c => ({
-          id: c.id,
-          title: c.title,
-          issuer: c.issuer,
-          date: c.date,
-          image: c.image,
-          skills: c.skills.join(','),
-          verifyUrl: c.verifyUrl || null
-        }))
-      });
-      items = await db.certification.findMany();
-    }
 
     // Format skills back to array from comma-separated string
     const formatted = items.map(c => ({

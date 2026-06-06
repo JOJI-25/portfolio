@@ -8,20 +8,6 @@ export async function GET() {
   try {
     let items = await db.dashboardItem.findMany();
     
-    // Auto-seed if empty
-    if (items.length === 0) {
-      await db.dashboardItem.createMany({
-        data: defaultDashboards.map(d => ({
-          id: d.id,
-          title: d.title,
-          description: d.description,
-          image: d.image,
-          tool: d.tool,
-          link: null
-        }))
-      });
-      items = await db.dashboardItem.findMany();
-    }
 
     return NextResponse.json(items);
   } catch (error) {
