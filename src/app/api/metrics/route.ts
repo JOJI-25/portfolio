@@ -44,21 +44,21 @@ export async function GET() {
         value: skillCount,
         icon: "Layers",
       },
-      {
-        label: "Certifications Earned",
-        value: certCount,
-        icon: "Award",
-      },
+      // {
+      //   label: "Certifications Earned",
+      //   value: certCount,
+      //   icon: "Award",
+      // },
       {
         label: "GitHub Repositories",
         value: githubRepoCount,
         icon: "Github",
       },
-      {
-        label: "Dashboards Created",
-        value: dashboardCount,
-        icon: "BarChart3",
-      }
+      // {
+      //   label: "Dashboards Created",
+      //   value: dashboardCount,
+      //   icon: "BarChart3",
+      // }
     ];
 
     // Merge dynamic metrics with any manual metrics the user added
