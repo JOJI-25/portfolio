@@ -20,9 +20,9 @@ export const navItems: NavItem[] = [
   { label: "About", href: "#about", icon: "User" },
   { label: "Journey", href: "#journey", icon: "Route" },
   { label: "Skills", href: "#skills", icon: "Layers" },
-  // { label: "Dashboards", href: "#dashboards", icon: "BarChart3" },
-  // { label: "Certifications", href: "#certifications", icon: "Award" },
-  // { label: "Achievements", href: "#achievements", icon: "Shield" },
+  { label: "Dashboards", href: "#dashboards", icon: "BarChart3" },
+  { label: "Certifications", href: "#certifications", icon: "Award" },
+  { label: "Achievements", href: "#achievements", icon: "Shield" },
   { label: "GitHub", href: "#github", icon: "Github" },
   { label: "Contact", href: "#contact", icon: "Mail" },
 ];

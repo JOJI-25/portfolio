@@ -102,6 +102,7 @@ function ParticleNetwork() {
         <bufferGeometry>
           <bufferAttribute
             attach="attributes-position"
+            args={[linePositions, 3]}
             count={linePositions.length / 3}
             array={linePositions}
             itemSize={3}

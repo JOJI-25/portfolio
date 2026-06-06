@@ -11,10 +11,10 @@ import {
 import { Github } from '@/components/icons/BrandIcons';
 import { fadeUp, staggerContainer } from '@/lib/animations';
 
-import type { ElementType } from 'react';
+import type { ComponentType } from 'react';
 
 // ─── Icon Mapping ───────────────────────────────────────────
-const iconMap: Record<string, ElementType> = {
+const iconMap: Record<string, ComponentType<any>> = {
   FolderKanban,
   Layers,
   Award,

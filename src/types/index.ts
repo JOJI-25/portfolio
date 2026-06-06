@@ -25,9 +25,9 @@ export interface Skill {
   progress?: number;
   description: string;
   relatedProjects: string[];
-  parentSkill?: string;
-  children?: string[];
-  notes?: string;
+  parentSkill?: string | null;
+  children?: string[] | null;
+  notes?: string | null;
 }
 
 export interface Certification {
@@ -59,8 +59,13 @@ export interface JourneyItem {
   description: string;
   progress?: number;
   projectCount?: number;
-  date?: string;
+  date: string;
   icon: string;
+  title: string;
+  role: string;
+  company: string;
+  type: "education" | "work" | "project";
+  skills: string[];
 }
 
 export interface NavItem {

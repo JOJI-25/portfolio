@@ -27,7 +27,7 @@ export default function RoadmapAdminPage() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id, status })
     });
-    setSkills(skills.map(s => s.id === id ? { ...s, status } : s));
+    setSkills(skills.map(s => s.id === id ? { ...s, status: status as Skill["status"] } : s));
     setSaving(false);
   };
 
@@ -38,7 +38,7 @@ export default function RoadmapAdminPage() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id, status })
     });
-    setJourneyItems(journeyItems.map(j => j.id === id ? { ...j, status } : j));
+    setJourneyItems(journeyItems.map(j => j.id === id ? { ...j, status: status as JourneyItem["status"] } : j));
     setSaving(false);
   };
 
