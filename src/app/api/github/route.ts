@@ -9,9 +9,19 @@ export async function GET() {
     const username = profile.github.split('/').pop();
     if (!username) return NextResponse.json({ repos: [], languageDistribution: [], username: null });
 
+    // GitHub requires a User-Agent header
+    const headers = { "User-Agent": "Portfolio-App" };
+
     // Fetch top 3 recently updated repos
-    const repoRes = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=3`, { next: { revalidate: 3600 } });
-    if (!repoRes.ok) throw new Error("GitHub API error");
+    const repoRes = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=3`, { 
+      headers,
+      next: { revalidate: 3600 } 
+    });
+    
+    if (!repoRes.ok) {
+      console.warn("GitHub API error for repos:", repoRes.statusText);
+      return NextResponse.json({ repos: [], languageDistribution: [], username });
+    }
     
     const reposData = await repoRes.json();
     
@@ -25,8 +35,12 @@ export async function GET() {
     }));
 
     // For language distribution, fetch all repos to calculate
-    const allRepoRes = await fetch(`https://api.github.com/users/${username}/repos?per_page=100`, { next: { revalidate: 3600 } });
-    const allReposData = await allRepoRes.json();
+    const allRepoRes = await fetch(`https://api.github.com/users/${username}/repos?per_page=100`, { 
+      headers,
+      next: { revalidate: 3600 } 
+    });
+    
+    const allReposData = allRepoRes.ok ? await allRepoRes.json() : [];
     
     const langCounts: Record<string, number> = {};
     let total = 0;
